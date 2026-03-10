@@ -1,0 +1,12 @@
+{
+  "name": "minecraft-browser-multiplayer",
+  "version": "1.0.0",
+  "description": "Minecraft Browser Edition - Local Multiplayer Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.16.0"
+  }
+}
