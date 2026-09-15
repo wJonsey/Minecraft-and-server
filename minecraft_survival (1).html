@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Minecraft Browser Edition</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;overflow:hidden;font-family:'Courier New',monospace}
+body{background:#000;overflow:hidden;font-family:'Manrope',sans-serif;color:#f5f3ed}
 canvas#c{display:block}
 
 /* Crosshair */
@@ -17,14 +17,14 @@ canvas#c{display:block}
 #crosshair::after{width:100%;height:2px;top:50%;transform:translateY(-50%)}
 
 /* Hotbar */
-#hotbar{position:fixed;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:3px;z-index:10;background:rgba(0,0,0,0.5);padding:3px;border-radius:3px;box-shadow:0 2px 12px rgba(0,0,0,0.6)}
-.slot{width:48px;height:48px;background:rgba(55,55,55,0.85);border:2px solid #555;display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;border-radius:2px;transition:border-color 0.1s}
-.slot.active{border-color:#fff;background:rgba(110,110,110,0.9);box-shadow:0 0 0 1px #fff,0 0 10px rgba(255,255,255,0.2)}
+#hotbar{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:4px;z-index:10;background:rgba(18,22,22,0.78);padding:6px;border:1px solid rgba(235,225,196,0.22);border-radius:7px;box-shadow:0 8px 28px rgba(0,0,0,0.45);backdrop-filter:blur(8px)}
+.slot{width:48px;height:48px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;border-radius:4px;transition:border-color 0.1s,background 0.1s}
+.slot.active{border-color:#e9d49b;background:rgba(232,201,124,0.18);box-shadow:0 0 0 1px rgba(233,212,155,0.45),0 0 14px rgba(222,183,97,0.22)}
 .slot canvas{width:34px;height:34px;image-rendering:pixelated}
 .slot-num{position:absolute;top:1px;left:3px;font-size:8px;color:#aaa;pointer-events:none;font-family:'Courier New',monospace}
 
 /* Coords */
-#hud{position:fixed;top:8px;left:8px;color:#fff;font-size:11px;text-shadow:1px 1px 0 #000;background:rgba(0,0,0,0.5);padding:6px 10px;border-radius:3px;z-index:10;line-height:1.8;border:1px solid rgba(255,255,255,0.08)}
+#hud{position:fixed;top:14px;left:14px;color:#f3efe4;font-size:11px;text-shadow:1px 1px 2px #000;background:rgba(20,25,24,0.64);padding:8px 12px;border-radius:6px;z-index:10;line-height:1.8;border:1px solid rgba(240,225,188,0.2);backdrop-filter:blur(6px)}
 
 /* Block label */
 #block-label{position:fixed;bottom:66px;left:50%;transform:translateX(-50%);color:#fff;font-size:12px;text-shadow:1px 1px 0 #000;background:rgba(0,0,0,0.55);padding:3px 12px;border-radius:2px;z-index:10;opacity:0;transition:opacity 0.3s;pointer-events:none;letter-spacing:1px}
@@ -41,26 +41,26 @@ canvas#c{display:block}
 .player-tag{position:fixed;z-index:8;pointer-events:none;transform:translate(-50%,-100%);background:rgba(0,0,0,0.55);color:#fff;font-size:10px;padding:1px 6px;border-radius:2px;white-space:nowrap;text-shadow:1px 1px 0 #000}
 
 /* Main overlay */
-#overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:100;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px)}
+#overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:100;background:rgba(8,12,12,0.48);backdrop-filter:blur(7px)}
 #overlay.hidden{display:none}
-.panel{background:linear-gradient(135deg,#2a2a2a,#1a1a1a);border:2px solid #555;box-shadow:0 8px 32px rgba(0,0,0,0.8),inset 0 1px 0 rgba(255,255,255,0.1);padding:30px 40px;min-width:320px;text-align:center;border-radius:4px}
-.panel h1{font-size:22px;color:#7af;margin-bottom:6px;letter-spacing:4px;font-weight:900;text-shadow:0 0 20px rgba(100,160,255,0.6)}
-.panel p.sub{color:#666;font-size:10px;margin-bottom:20px;letter-spacing:2px}
-.btn{display:block;width:100%;margin:6px 0;background:linear-gradient(180deg,#4a4a4a,#333);border:1px solid #666;outline:none;padding:10px 18px;cursor:pointer;font-family:'Courier New',monospace;font-size:12px;font-weight:bold;color:#ddd;letter-spacing:2px;border-radius:2px;transition:all 0.12s}
-.btn:hover{background:linear-gradient(180deg,#6a6aff,#4444cc);color:#fff;border-color:#88f;box-shadow:0 0 10px rgba(100,100,255,0.4)}
+.panel{background:rgba(22,28,27,0.9);border:1px solid rgba(239,221,174,0.3);box-shadow:0 18px 60px rgba(0,0,0,0.65),inset 0 1px 0 rgba(255,255,255,0.08);padding:34px 42px;min-width:340px;text-align:center;border-radius:8px}
+.panel h1{font-size:24px;color:#ead59f;margin-bottom:6px;letter-spacing:5px;font-weight:800;text-shadow:0 2px 16px rgba(226,190,111,0.25)}
+.panel p.sub{color:#a8aaa0;font-size:10px;margin-bottom:20px;letter-spacing:2px}
+.btn{display:block;width:100%;margin:7px 0;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.18);outline:none;padding:11px 18px;cursor:pointer;font-family:'Manrope',sans-serif;font-size:11px;font-weight:700;color:#e7e5db;letter-spacing:1.5px;border-radius:4px;transition:all 0.12s}
+.btn:hover{background:rgba(218,188,112,0.2);color:#fff;border-color:#d8bd78;box-shadow:0 0 16px rgba(201,164,83,0.2)}
 .btn:active{transform:translateY(1px)}
 .input-field{width:100%;background:rgba(0,0,0,0.5);color:#fff;border:1px solid #555;padding:8px 10px;font-size:12px;font-family:'Courier New',monospace;outline:none;border-radius:2px;margin:4px 0;letter-spacing:1px}
 .input-field:focus{border-color:#7af;box-shadow:0 0 8px rgba(100,160,255,0.3)}
 .label{color:#888;font-size:10px;text-align:left;margin:8px 0 2px;letter-spacing:1px}
 
 /* Loading */
-#loading{position:fixed;inset:0;background:linear-gradient(135deg,#0a0a1a,#1a1a2e);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:200;color:#fff}
-#loading h2{font-size:24px;letter-spacing:6px;margin-bottom:6px;color:#7af;text-shadow:0 0 30px rgba(100,160,255,0.5)}
-#loading p{font-size:11px;color:#556;margin-bottom:24px;letter-spacing:3px}
-#bar-bg{width:300px;height:14px;border:1px solid #334;background:#0a0a1a;border-radius:7px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,0.5)}
-#bar{height:100%;background:linear-gradient(90deg,#3a6,#7df,#3a6);background-size:200% 100%;width:0%;transition:width 0.12s;animation:barShimmer 1.5s linear infinite}
+#loading{position:fixed;inset:0;background:radial-gradient(circle at 50% 42%,#334944 0%,#111918 68%);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:200;color:#fff}
+#loading h2{font-size:24px;letter-spacing:6px;margin-bottom:6px;color:#ead59f;text-shadow:0 2px 26px rgba(226,190,111,0.35)}
+#loading p{font-size:11px;color:#a8aaa0;margin-bottom:24px;letter-spacing:3px}
+#bar-bg{width:300px;height:10px;border:1px solid rgba(239,221,174,0.35);background:rgba(0,0,0,0.28);border-radius:5px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,0.5)}
+#bar{height:100%;background:linear-gradient(90deg,#b58a3b,#ead59f,#b58a3b);background-size:200% 100%;width:0%;transition:width 0.12s;animation:barShimmer 1.5s linear infinite}
 @keyframes barShimmer{0%{background-position:0% 0%}100%{background-position:200% 0%}}
-#load-txt{margin-top:10px;font-size:10px;color:#556;letter-spacing:2px}
+#load-txt{margin-top:10px;font-size:10px;color:#a8aaa0;letter-spacing:2px}
 #loading.hidden{display:none}
 
 /* Click prompt */
@@ -315,6 +315,7 @@ function makeTexture(r,g,b,variant){
   }
   ctx.putImageData(id,0,0);
   const t=new THREE.CanvasTexture(cv);
+  t.encoding=THREE.sRGBEncoding;
   t.magFilter=THREE.LinearFilter;
   t.minFilter=THREE.LinearMipmapLinearFilter;
   t.generateMipmaps=true;
@@ -341,21 +342,23 @@ cv.width=innerWidth;cv.height=innerHeight;
 const renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,powerPreference:'high-performance'});
 renderer.setSize(innerWidth,innerHeight);
 renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-renderer.setClearColor(0x87CEEB);
+renderer.setClearColor(0x9fc9dc);
+renderer.physicallyCorrectLights=true;
 renderer.shadowMap.enabled=true;
 renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 renderer.outputEncoding=THREE.sRGBEncoding;
 renderer.toneMapping=THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure=1.1;
+renderer.toneMappingExposure=0.92;
 
 const scene=new THREE.Scene();
-scene.fog=new THREE.FogExp2(0x87CEEB,0.018);
+scene.background=new THREE.Color(0x9fc9dc);
+scene.fog=new THREE.FogExp2(0x9fc9dc,0.012);
 
 const camera=new THREE.PerspectiveCamera(72,innerWidth/innerHeight,0.05,300);
 
 // Rich multi-light setup
-const ambient=new THREE.AmbientLight(0xb0c8e8,0.6);scene.add(ambient);
-const sun=new THREE.DirectionalLight(0xfff5d0,1.4);
+const ambient=new THREE.AmbientLight(0xc4d7df,0.8);scene.add(ambient);
+const sun=new THREE.DirectionalLight(0xffe6bd,2.8);
 sun.position.set(80,120,60);
 sun.castShadow=true;
 sun.shadow.mapSize.width=2048;sun.shadow.mapSize.height=2048;
@@ -364,8 +367,8 @@ sun.shadow.camera.left=-80;sun.shadow.camera.right=80;
 sun.shadow.camera.top=80;sun.shadow.camera.bottom=-80;
 sun.shadow.bias=-0.0005;
 scene.add(sun);
-const skyLight=new THREE.HemisphereLight(0x88bbff,0x664422,0.55);scene.add(skyLight);
-const fillLight=new THREE.DirectionalLight(0x8899cc,0.25);
+const skyLight=new THREE.HemisphereLight(0x9dc7e8,0x4d3928,0.8);scene.add(skyLight);
+const fillLight=new THREE.DirectionalLight(0x91b6d0,0.35);
 fillLight.position.set(-1,-0.3,-1);scene.add(fillLight);
 
 // ══════════════════════════════════════════════════════════════
@@ -458,6 +461,10 @@ function genChunk(cx,cz){
       }
     }
   }
+  // Rebuild loaded neighbors so chunk-boundary faces are culled after both chunks exist.
+  [ck(cx-1,cz),ck(cx+1,cz),ck(cx,cz-1),ck(cx,cz+1)].forEach(neighbor=>{
+    if(chunks.has(neighbor))dirty.add(neighbor);
+  });
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -468,10 +475,19 @@ function getMat(id,face,tr){
   const key=`${id}_${face}`;
   if(matCache[key])return matCache[key];
   const t=getTex(id,face);
-  matCache[key]=new THREE.MeshLambertMaterial({
-    map:t,transparent:!!tr,opacity:tr?(face==='t'?0.78:0.68):1,
-    side:tr?THREE.DoubleSide:THREE.FrontSide,
-    alphaTest:tr&&id===LEAVES?0.4:0,
+  const translucent=id===WATER||id===GLASS;
+  const roughness=id===GLASS?0.12:id===WATER?0.08:id===LOG||id===PLANKS?0.78:id===GOLD||id===IRON?0.34:0.92;
+  const metalness=id===GOLD?0.72:id===IRON||id===DIAMOND?0.34:0;
+  matCache[key]=new THREE.MeshStandardMaterial({
+    map:t,transparent:translucent,opacity:translucent?(face==='t'?0.78:0.68):1,
+    depthWrite:!translucent,
+    // Terrain faces must remain visible from either side; this prevents an inverted
+    // chunk boundary winding from creating an x-ray gap in a solid wall.
+    side:THREE.DoubleSide,
+    alphaTest:id===LEAVES?0.5:0,
+    roughness,metalness,
+    bumpMap:id===WATER||id===GLASS?null:t,
+    bumpScale:id===LOG||id===PLANKS?0.035:0.018,
   });
   return matCache[key];
 }
@@ -649,6 +665,7 @@ function blocked(px,py,pz){
 }
 
 let lastSend=0;
+let fallDistance=0;
 function updatePlayer(dt,t){
   P.yaw-=mx*0.002;P.pitch-=my*0.002;
   P.pitch=Math.max(-1.55,Math.min(1.55,P.pitch));
@@ -666,17 +683,33 @@ function updatePlayer(dt,t){
     P.vel.lerp(mv,0.18);
   }else{
     P.vel.x=mv.x;P.vel.z=mv.z;P.vel.y+=GRAV*dt;
-    if(K['Space']&&P.onGround){P.vel.y=10;P.onGround=false;}
+    if(K['Space']&&P.onGround){P.vel.y=10;P.onGround=false;fallDistance=0;}
   }
   const nx=P.pos.x+P.vel.x*dt;
   if(!blocked(nx,P.pos.y,P.pos.z))P.pos.x=nx;else P.vel.x=0;
+  const previousY=P.pos.y;
+  const verticalVelocity=P.vel.y;
   const ny=P.pos.y+P.vel.y*dt;
-  if(!blocked(P.pos.x,ny,P.pos.z)){P.pos.y=ny;if(!P.flying)P.onGround=false;}
-  else{if(P.vel.y<0)P.onGround=true;P.vel.y=0;}
+  if(!blocked(P.pos.x,ny,P.pos.z)){
+    P.pos.y=ny;
+    if(!P.flying){
+      P.onGround=false;
+      if(verticalVelocity<0)fallDistance+=previousY-ny;
+    }
+  } else {
+    if(!P.flying&&verticalVelocity<0){
+      const damage=Math.floor(Math.max(0,fallDistance-3));
+      if(damage>0)takeDamage(damage,'Fell from a high place');
+      fallDistance=0;
+      P.onGround=true;
+    } else if(!P.flying) {
+      fallDistance=0;
+    }
+    P.vel.y=0;
+  }
   const nz=P.pos.z+P.vel.z*dt;
   if(!blocked(P.pos.x,P.pos.y,nz))P.pos.z=nz;else P.vel.z=0;
-  if(P.pos.y<-5){P.pos.set(8,75,8);P.vel.set(0,0,0);takeDamage(10,'Fell into the void');}
-  checkFallDamage(P.vel.y);
+  if(P.pos.y<-5){P.pos.set(8,75,8);P.vel.set(0,0,0);fallDistance=0;takeDamage(10,'Fell into the void');}
   camera.position.set(P.pos.x,P.pos.y+PH*0.9,P.pos.z);
   camera.rotation.order='YXZ';camera.rotation.y=P.yaw;camera.rotation.x=P.pitch;
 
@@ -752,16 +785,6 @@ function survivalTick(dt){
   if(SURVIVAL.health<=0)playerDie('Starved to death');
 }
 
-// Fall damage
-let prevVelY=0;
-function checkFallDamage(velY){
-  if(P.onGround&&prevVelY<-8){
-    const dmg=Math.floor((-prevVelY-8)*1.2);
-    if(dmg>0)takeDamage(dmg,'Fell from a high place');
-  }
-  prevVelY=velY;
-}
-
 function takeDamage(amount,cause){
   if(!SURVIVAL.alive||SURVIVAL.invincibleTimer>0)return;
   SURVIVAL.health=Math.max(0,SURVIVAL.health-amount);
@@ -790,7 +813,7 @@ function respawnPlayer(){
   document.getElementById('death-screen').classList.remove('show');
   let spawnY=SEA+5;
   for(let y=CH-1;y>0;y--){const b=getBlock(8,y,8);if(b&&b!==AIR&&b!==WATER){spawnY=y+2;break;}}
-  P.pos.set(8,spawnY,8);P.vel.set(0,0,0);P.flying=false;prevVelY=0;
+  P.pos.set(8,spawnY,8);P.vel.set(0,0,0);P.flying=false;fallDistance=0;
   running=true;
   document.body.requestPointerLock();
   lastT=performance.now();
@@ -1008,7 +1031,7 @@ function makeNameTag(name,color){
   ctx.fillStyle=color;ctx.font='bold 14px Courier New';ctx.textAlign='center';
   ctx.fillText(name,64,20);
   const tex=new THREE.CanvasTexture(cv2);
-  const mat=new THREE.SpriteMaterial({map:tex,transparent:true,depthTest:false});
+  const mat=new THREE.SpriteMaterial({map:tex,transparent:true,depthTest:true,depthWrite:false});
   const sprite=new THREE.Sprite(mat);
   sprite.scale.set(1.8,0.4,1);
   sprite.position.y=2.2;
@@ -1042,15 +1065,31 @@ function updatePlayerList(){
   el.innerHTML=entries.map(e=>`<div class="pl-entry"><div class="pl-dot" style="background:${e.color}"></div>${e.name}${e.self?' (you)':''}</div>`).join('');
 }
 
+function applyServerBlockChange(x,y,z,id){
+  if(!Number.isInteger(x)||!Number.isInteger(y)||!Number.isInteger(z)||y<0||y>=CH)return;
+  if(!serverChanges)serverChanges={};
+  const key=`${x},${y},${z}`;
+  if(id===0)delete serverChanges[key];else serverChanges[key]=id;
+  const cx=Math.floor(x/CS),cz=Math.floor(z/CS);
+  const ch2=chunks.get(ck(cx,cz));
+  if(!ch2)return;
+  const lx=((x%CS)+CS)%CS,lz=((z%CS)+CS)%CS;
+  ch2[lx+y*CS+lz*CS*CH]=id;
+  [ck(cx,cz),ck(cx-1,cz),ck(cx+1,cz),ck(cx,cz-1),ck(cx,cz+1)].forEach(k2=>dirty.add(k2));
+}
+
 function connectWS(){
   const host=location.host||'localhost:3000';
-  ws=new WebSocket(`ws://${host}`);
+  const scheme=location.protocol==='https:'?'wss':'ws';
+  if(ws){ws.close();ws=null;}
+  ws=new WebSocket(`${scheme}://${host}`);
+  const socket=ws;
   ws.onopen=()=>{
     ws.send(JSON.stringify({type:'name',name:myName}));
     addChatMsg('System','#7af','Connected to server!');
     updatePlayerList();
   };
-  ws.onclose=()=>{addChatMsg('System','#f88','Disconnected from server');};
+  ws.onclose=()=>{if(ws===socket)ws=null;addChatMsg('System','#f88','Disconnected from server');};
   ws.onerror=()=>{addChatMsg('System','#f88','Could not connect to server — playing offline');};
   ws.onmessage=(e)=>{
     let msg;try{msg=JSON.parse(e.data);}catch{return;}
@@ -1061,15 +1100,9 @@ function connectWS(){
         // Apply existing world changes
         for(const key in serverChanges){
           const[bx,by,bz]=key.split(',').map(Number);
-          const cx=Math.floor(bx/CS),cz=Math.floor(bz/CS);
-          const ch2=chunks.get(ck(cx,cz));
-          if(ch2){
-            const lx=((bx%CS)+CS)%CS,lz=((bz%CS)+CS)%CS;
-            ch2[lx+by*CS+lz*CS*CH]=serverChanges[key];
-            dirty.add(ck(cx,cz));
-          }
+          applyServerBlockChange(bx,by,bz,serverChanges[key]);
         }
-        msg.players.forEach(p=>addRemotePlayer(p));
+        (msg.players||[]).forEach(p=>addRemotePlayer(p));
         updatePlayerList();
         break;
       case 'playerJoin':
@@ -1085,21 +1118,17 @@ function connectWS(){
         if(remotePlayers[msg.id])remotePlayers[msg.id].data=Object.assign(remotePlayers[msg.id].data,msg);
         break;
       case 'playerName':
-        if(remotePlayers[msg.id]){remotePlayers[msg.id].data.name=msg.name;scene.remove(remotePlayers[msg.id].mesh);delete remotePlayers[msg.id];addRemotePlayer({...remotePlayers[msg.id]?.data,name:msg.name,id:msg.id});}
+        if(remotePlayers[msg.id]){
+          const data=Object.assign({},remotePlayers[msg.id].data,{name:msg.name});
+          scene.remove(remotePlayers[msg.id].mesh);
+          delete remotePlayers[msg.id];
+          addRemotePlayer(data);
+        }
         updatePlayerList();
         break;
       case 'blockChange':
         // Apply to world without re-sending
-        if(msg.y>=0&&msg.y<CH){
-          const cx=Math.floor(msg.x/CS),cz=Math.floor(msg.z/CS);
-          const ch2=chunks.get(ck(cx,cz));
-          if(ch2){
-            const lx=((msg.x%CS)+CS)%CS,lz=((msg.z%CS)+CS)%CS;
-            ch2[lx+msg.y*CS+lz*CS*CH]=msg.id;
-            [ck(cx,cz),ck(cx-1,cz),ck(cx+1,cz),ck(cx,cz-1),ck(cx,cz+1)].forEach(k2=>dirty.add(k2));
-          }
-          if(serverChanges)serverChanges[`${msg.x},${msg.y},${msg.z}`]=msg.id;
-        }
+        applyServerBlockChange(msg.x,msg.y,msg.z,msg.id);
         break;
       case 'chat':
         addChatMsg(msg.from,msg.color,msg.text);
@@ -1115,7 +1144,10 @@ function addChatMsg(from,color,text){
   const area=document.getElementById('chat-area');
   const div=document.createElement('div');
   div.className='chat-msg';
-  div.innerHTML=`<span style="color:${color}">${from}</span>: ${text}`;
+  const sender=document.createElement('span');
+  sender.style.color=color;
+  sender.textContent=from;
+  div.append(sender,document.createTextNode(`: ${text}`));
   area.appendChild(div);
   while(area.children.length>20)area.removeChild(area.firstChild);
   setTimeout(()=>div.remove(),8000);
@@ -1183,7 +1215,7 @@ function showPanel(id){
 function hideOverlay(){document.getElementById('overlay').classList.add('hidden');}
 function pauseGame(){running=false;document.exitPointerLock();showPanel('pause');}
 function resumeGame(){running=true;hideOverlay();document.body.requestPointerLock();lastT=performance.now();requestAnimationFrame(loop);}
-function mainMenu(){running=false;document.exitPointerLock();showPanel('menu');}
+function mainMenu(){running=false;document.exitPointerLock();if(ws){ws.close();ws=null;}showPanel('menu');}
 
 document.getElementById('btn-play').onclick=()=>{
   myName=document.getElementById('name-input').value.trim()||'Player';
@@ -1238,7 +1270,7 @@ function initWorld(){
       // Reset survival — give 3s spawn invincibility
       SURVIVAL.health=20;SURVIVAL.hunger=20;SURVIVAL.alive=true;SURVIVAL.kills=0;SURVIVAL.dayTime=0.1;
       SURVIVAL.invincibleTimer=3.0; // full 3 seconds spawn protection
-      mobs.length=0;mobSpawnTimer=0;prevVelY=0;
+      mobs.length=0;mobSpawnTimer=0;fallDistance=0;
       updateSurvivalHUD();
       requestAnimationFrame(loop);
       return;
